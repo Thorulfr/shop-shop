@@ -10,9 +10,7 @@ import { UPDATE_PRODUCTS } from '../../utils/actions';
 
 function ProductList() {
     const [state, dispatch] = useStoreContext();
-
     const { currentCategory } = state;
-
     const { loading, data } = useQuery(QUERY_PRODUCTS);
 
     useEffect(() => {
