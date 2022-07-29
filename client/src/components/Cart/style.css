@@ -42,10 +42,15 @@
     padding: 0.25rem;
     width: 50px;
     height: 50px;
+    transition: all 0.1s;
 }
 
 .cart-closed:hover {
     transform: rotate(8deg);
+}
+
+.cart-closed span {
+    cursor: pointer;
 }
 
 .cart img {
