@@ -12,6 +12,14 @@ const Cart = () => {
         dispatch({ type: TOGGLE_CART });
     }
 
+    function calculateTotal() {
+        let sum = 0;
+        state.cart.forEach((item) => {
+            sum += item.price * item.purchaseQuantity;
+        });
+        return sum.toFixed(2);
+    }
+
     if (!state.cartOpen) {
         return (
             <div className="cart-closed" onClick={toggleCart}>
@@ -28,32 +36,30 @@ const Cart = () => {
                 [Close]
             </div>
             <h2>Shopping Cart</h2>
-            <div>
-                <CartItem
-                    item={{
-                        name: 'Camera',
-                        image: 'camera.jpg',
-                        price: 5,
-                        purchaseQuantity: 3,
-                    }}
-                />
-                <CartItem
-                    item={{
-                        name: 'Soap',
-                        image: 'soap.jpg',
-                        price: 6,
-                        purchaseQuantity: 4,
-                    }}
-                />
-                <div className="flex-row space-between">
-                    <strong>Total: $0</strong>
-                    {Auth.loggedIn() ? (
-                        <button>Checkout</button>
-                    ) : (
-                        <span>(log in to check out)</span>
-                    )}
+            {state.cart.length ? (
+                <div>
+                    {state.cart.map((item) => (
+                        <CartItem key={item._id} item={item} />
+                    ))}
+                    <div className="flex-row space-between">
+                        <strong>Total: ${calculateTotal()}</strong>
+                        {Auth.loggedIn() ? (
+                            <button>Checkout</button>
+                        ) : (
+                            <span>(Log in to check out!)</span>
+                        )}
+                    </div>
                 </div>
-            </div>
+            ) : (
+                <div>
+                    <h3>
+                        You haven't added anything to your cart yet!
+                        <span role="img" aria-label="shocked">
+                            &nbsp;😱
+                        </span>
+                    </h3>
+                </div>
+            )}
         </div>
     );
 };
