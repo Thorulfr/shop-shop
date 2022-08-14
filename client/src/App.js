@@ -12,6 +12,7 @@ import Detail from './pages/Detail';
 import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Success from './pages/Success';
 import Nav from './components/Nav';
 import { StoreProvider } from './utils/GlobalState';
 import OrderHistory from './pages/OrderHistory';
@@ -51,6 +52,7 @@ function App() {
                                 element={<OrderHistory />}
                             />
                             <Route path="/products/:id" element={<Detail />} />
+                            <Route path="/success" element={<Success />} />
                             <Route path="*" element={<NoMatch />} />
                         </Routes>
                     </StoreProvider>
